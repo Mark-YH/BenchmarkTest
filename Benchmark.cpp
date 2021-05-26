@@ -76,7 +76,7 @@ float Benchmark::griewank(vector<float> x) {
     float fx = 0.0, product = 1.0;
     for (int i = 0; i < x.size(); i++) {
         fx += x[i] * x[i] / 4000.0f;
-        product *= cos(x[i] / sqrt(i));
+        product *= cos(x[i] / sqrt(i + 1));
     }
     return fx - product + 1.0f;
 }
