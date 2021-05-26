@@ -11,7 +11,7 @@ using std::vector;
 
 class Benchmark {
 public:
-    Benchmark() = delete;
+    Benchmark() = default;
 
     float absolute(vector<float> x);
 
@@ -25,13 +25,13 @@ public:
 
     float griewank(vector<float> x);
 
-    float booth(vector<float> x);
+    float booth(float x1, float x2);
 
-    float bohachevsky(vector<float> x);
+    float bohachevsky(float x1, float x2);
 
-    float dropWave(vector<float> x);
+    float dropWave(float x1, float x2);
 
-    float eggholder(vector<float> x);
+    float eggholder(float x1, float x2);
 };
 
 #endif //BENCHMARKTEST_BENCHMARK_H
