@@ -37,9 +37,12 @@ float Benchmark::ackley(vector<float> x) {
     float fx = 0.0, sum1 = 0.0, sum2 = 0.0;
     for (int i = 0; i < x.size(); i++) {
         sum1 += x[i] * x[i];
-        sum2 += 2.0f * PI * x[i];
+        sum2 += cos(2.0f * PI * x[i]);
     }
-    fx = -20.0f * exp(-0.2f * sqrt((1.0f / x.size()) * sum1)) - exp((1.0f / x.size()) * sum2) + 20.0f + exp(1.0f);
+    fx = 20.0f - 20.0f * exp(-0.2f * sqrt(sum1 / x.size())) - exp(sum2 / x.size()) + exp(1.0f);
+
+    // using the following formula order causes IEEE 754 precision loss
+    // fx = -20.0f * exp(-0.2f * sqrt(sum1 / x.size())) - exp(sum2 / x.size()) + 20.0f + exp(1.0f);
     return fx;
 }
 
@@ -93,9 +96,9 @@ float Benchmark::bohachevsky(float x1, float x2) {
     /**
      * domain [-100, 100]
      */
-    float f1 = x1 * x1 + 2.0f * x2 * x2 - 0.3f * cos(3.0f * PI * x1) - 0.4f * cos(4.0f * PI * x2) + 0.7;
-    float f2 = x1 * x1 + 2.0f * x2 * x2 - 0.3f * cos(3.0f * PI * x1) * cos(4.0f * PI * x2) + 0.3;
-    float f3 = x1 * x1 + 2.0f * x2 * x2 - 0.3f * cos(3.0f * PI * x1 + 4.0f * PI * x2) + 0.3;
+    float f1 = x1 * x1 + 2.0f * x2 * x2 - 0.3f * cos(3.0f * PI * x1) - 0.4f * cos(4.0f * PI * x2) + 0.7f;
+    float f2 = x1 * x1 + 2.0f * x2 * x2 - 0.3f * cos(3.0f * PI * x1) * cos(4.0f * PI * x2) + 0.3f;
+    float f3 = x1 * x1 + 2.0f * x2 * x2 - 0.3f * cos(3.0f * PI * x1 + 4.0f * PI * x2) + 0.3f;
     return f1;
 }
 
